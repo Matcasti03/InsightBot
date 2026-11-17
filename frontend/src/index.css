@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --app: 248 250 252;
+  --surface: 255 255 255;
+  --panel: 241 245 249;
+  --line: 226 232 240;
+  --main: 15 23 42;
+  --muted: 100 116 139;
+  --primary: 2 132 199;
+  --primary-soft: 224 242 254;
+  --primary-contrast: 255 255 255;
+  --accent: 16 185 129;
+  --danger: 244 63 94;
+  --warning: 245 158 11;
+}
+
+.dark {
+  color-scheme: dark;
+  --app: 11 17 32;
+  --surface: 30 41 59;
+  --panel: 15 23 42;
+  --line: 51 65 85;
+  --main: 226 232 240;
+  --muted: 148 163 184;
+  --primary: 56 189 248;
+  --primary-soft: 12 74 110;
+  --primary-contrast: 8 47 73;
+  --accent: 16 185 129;
+  --danger: 251 113 133;
+  --warning: 251 191 36;
+}
+
+@layer base {
+  html {
+    @apply scroll-smooth bg-app text-main;
+  }
+
+  body {
+    @apply min-h-screen bg-app font-sans text-main antialiased;
+  }
+
+  ::selection {
+    @apply bg-primary/25;
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator {
+    @apply opacity-60;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--line)) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgb(var(--line));
+    border-radius: 999px;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-line/70 bg-surface/85 shadow-card backdrop-blur-xl;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-glow;
+  }
+
+  .glass {
+    @apply border border-line/60 bg-surface/70 backdrop-blur-2xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary shadow-lg shadow-primary/20 hover:brightness-105 active:scale-[0.98];
+    color: rgb(var(--primary-contrast));
+  }
+
+  .btn-secondary {
+    @apply btn border border-line bg-surface text-main hover:border-primary/40 hover:bg-panel;
+  }
+
+  .btn-ghost {
+    @apply btn text-muted hover:bg-panel hover:text-main;
+  }
+
+  .btn-danger {
+    @apply btn bg-danger text-white hover:brightness-110 active:scale-[0.98];
+  }
+
+  .icon-btn {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-xl border border-line/70 bg-surface/70 text-muted transition-all hover:border-primary/40 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/60;
+  }
+
+  .input {
+    @apply w-full rounded-xl border border-line bg-surface px-3.5 py-2.5 text-sm text-main outline-none transition placeholder:text-muted/70 focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .select {
+    @apply input appearance-none bg-[length:16px] bg-[right_0.9rem_center] bg-no-repeat pr-10;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+
+  .textarea {
+    @apply input min-h-[110px] resize-y;
+  }
+
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-muted;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold;
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden rounded-xl bg-line/50;
+  }
+
+  .skeleton::after {
+    content: '';
+    @apply absolute inset-0 -translate-x-full animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent;
+  }
+
+  .page-title {
+    @apply text-2xl font-extrabold tracking-tight text-main sm:text-3xl;
+  }
+
+  .page-subtitle {
+    @apply mt-1 text-sm text-muted;
+  }
+
+  .section-title {
+    @apply text-base font-bold tracking-tight text-main;
+  }
+
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

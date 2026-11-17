@@ -1,0 +1,34 @@
+{
+  "name": "insightbot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "InSightBot - plataforma de endoscopia por capsula robotica para UBSs e clinicas",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build": "npm run build -w frontend",
+    "typecheck": "npm run typecheck -w frontend",
+    "seed": "npm run seed -w backend",
+    "start": "npm run start -w backend",
+    "test": "npm run test -w backend && npm run test -w frontend",
+    "check": "npm test && npm run build",
+    "setup": "npm run setup -w backend",
+    "doctor": "npm run doctor -w backend"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "overrides": {
+    "workbox-build": {
+      "glob": "^14.0.6"
+    }
+  }
+}
