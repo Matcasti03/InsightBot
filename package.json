@@ -8,20 +8,22 @@
     "frontend"
   ],
   "scripts": {
-    "dev": "concurrently -n api,web -c cyan,magenta \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "dev": "npm run build:capsule && concurrently -n api,web -c cyan,magenta \"npm run dev -w backend\" \"npm run dev -w frontend\"",
     "dev:backend": "npm run dev -w backend",
     "dev:frontend": "npm run dev -w frontend",
-    "build": "npm run build -w frontend",
+    "build": "npm run build:capsule && npm run build -w frontend",
     "typecheck": "npm run typecheck -w frontend",
     "seed": "npm run seed -w backend",
     "start": "npm run start -w backend",
     "test": "npm run test -w backend && npm run test -w frontend",
     "check": "npm test && npm run build",
     "setup": "npm run setup -w backend",
-    "doctor": "npm run doctor -w backend"
+    "doctor": "npm run doctor -w backend",
+    "build:capsule": "node frontend/scripts/capsule-3d/build.mjs"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2"
+    "concurrently": "^9.1.2",
+    "esbuild": "0.25.12"
   },
   "engines": {
     "node": ">=22.13"

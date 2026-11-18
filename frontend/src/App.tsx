@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppLayout from './components/AppLayout';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -7,6 +7,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import RegisterPage from './pages/RegisterPage';
 import type { Role } from './types';
 
+const CapsulePrototypePage = lazy(() => import('./pages/CapsulePrototypePage'));
 const AdminPage = lazy(() => import('./pages/AdminPage'));
 const ConsolePage = lazy(() => import('./pages/ConsolePage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
@@ -19,6 +20,7 @@ const STAFF_ROLES: Role[] = ['superadmin', 'medico', 'operador_ubs'];
 export default function App() {
   return (
     <Routes>
+      <Route path="/capsula" element={<Suspense fallback={<p>Carregando cápsula 3D…</p>}><CapsulePrototypePage /></Suspense>} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/cadastro" element={<RegisterPage />} />
 

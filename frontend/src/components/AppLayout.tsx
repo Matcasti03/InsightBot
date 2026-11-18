@@ -35,6 +35,7 @@ const STAFF_ROLES: Role[] = ['superadmin', 'medico', 'operador_ubs'];
 const NAV_ITEMS: NavItem[] = [
   { to: '/', label: 'Início', icon: LayoutDashboard, roles: ALL_ROLES, end: true },
   { to: '/console', label: 'Console 3D', icon: Pill, roles: STAFF_ROLES },
+  { to: '/capsula', label: 'Protótipo da cápsula', icon: Pill, roles: ALL_ROLES },
   { to: '/pacientes', label: 'Pacientes', icon: Users, roles: STAFF_ROLES },
   { to: '/exames', label: 'Laudos', icon: ClipboardList, roles: ALL_ROLES, patientLabel: 'Meus Exames' },
   { to: '/admin', label: 'Administração', icon: ShieldCheck, roles: ['superadmin'] },

@@ -321,3 +321,17 @@ instrumento na camera e no 3D. Os controles permitem posicionar, avancar, girar,
 abrir, fechar e recolher a garra. Sua configuracao permanece ao alternar as
 visoes e e reiniciada ao trocar de exame. Esses movimentos nao registram uma
 amostra: a coleta continua usando a confirmacao em duas etapas.
+
+
+## Protótipo conceitual da cápsula
+
+O visualizador público 3D fica em `/capsula`, acessível pelo menu da plataforma.
+Permite abrir a carcaça, inspecionar componentes, movimentar a microgarra e exportar PNG ou GLB.
+É um estudo ilustrativo de hardware, sem dimensões ou especificações de fabricação validadas.
+
+- Código editável: `frontend/scripts/capsule-3d/`.
+- Gerar versão independente: `npm run build:capsule`.
+- Resultado offline: `frontend/public/capsula-3d/index.html` e arquivo GLB.
+- Publicação da cápsula: https://Matcasti03.github.io/InsightBot/
+- O workflow `publish-capsule.yml` publica somente o visualizador estático no GitHub Pages.
+  A API, o banco local e os arquivos de mídia pessoais não são publicados.

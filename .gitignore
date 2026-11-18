@@ -12,3 +12,7 @@ coverage
 dev-dist
 
 backend/data/
+
+# Local media exports and generated standalone capsule
+output/
+frontend/public/capsula-3d/
