@@ -1,4 +1,5 @@
 import * as T from 'three';
+import { PRODUCTS } from './products.mjs';
 export function buildCapsule(){
  const root=new T.Group();root.name='InSightBot_Concept';
  const mat=(color,metalness=.2,roughness=.3)=>new T.MeshStandardMaterial({color,metalness,roughness});
@@ -35,11 +36,17 @@ export function buildCapsule(){
   const curve=new T.CatmullRomCurve3([new T.Vector3(0,0,0),new T.Vector3(.13*sign,.15,0),new T.Vector3(.15*sign,.34,0),new T.Vector3(.035*sign,.45,0)]);
   mesh(new T.TubeGeometry(curve,24,.028,10,false),steel,jaw,'Mandibula');
  }
- const parts={shell,camera,energy,electronics,magnetic,gripper,rear};
+ const storage=new T.Group();storage.name='Reservatorio_amostra_conceitual';storage.position.set(.52,1.48,.18);core.add(storage);
+ const reservoirMaterial=new T.MeshPhysicalMaterial({color:'#a8edec',transparent:true,opacity:.5,roughness:.15,metalness:.1,side:T.DoubleSide});
+ cyl(.21,.62,reservoirMaterial,storage,'Compartimento_amostra');cyl(.22,.07,teal,storage,'Tampa_reservatorio',[0,.345,0]);
+ const parts={shell,camera,energy,electronics,magnetic,gripper,rear,storage};
+ root.userData={status:'Concept only; candidate components, not a validated assembly',scale:'Illustrative, not dimensionally verified'};
+ for(const product of PRODUCTS){const g=parts[product.part];g.userData.products??=[];g.userData.products.push({name:product.name,status:product.status,source:product.url});}
+
  function update({explode=0,transparent=false,extension=0,opening=.55,lights=true}){
   shell.forEach((g,i)=>{g.position.x=(i?-1:1)*explode*1.9;});
   shellmat.transparent=transparent;shellmat.opacity=transparent?.17:1;shellmat.depthWrite=!transparent;shellmat.side=T.DoubleSide;
-  camera.position.y=explode*.7;rear.position.y=-explode*.6;energy.position.y=-explode*.25;magnetic.position.y=explode*.25;
+  camera.position.y=explode*.7;rear.position.y=-explode*.6;energy.position.y=-explode*.25;magnetic.position.y=explode*.25;storage.position.x=.52+explode*.55;
   seam1.visible=seam2.visible=explode<.05;
   const len=.06+extension*1.1;shaft.scale.y=len;shaft.position.y=len/2;wrist.position.y=len;wrist.scale.setScalar(extension>.02?1:0.01);
   jawL.rotation.z=-opening*.65;jawR.rotation.z=opening*.65;
